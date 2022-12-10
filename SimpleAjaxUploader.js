@@ -998,9 +998,9 @@ ss.SimpleUpload.prototype = {
         }
 
         // Hide file input
-        if ( this._input && this._input.parentNode ) {
-            this._input.parentNode.style.visibility = 'hidden';
-        }
+        // if ( this._input && this._input.parentNode ) {
+            // this._input.parentNode.style.visibility = 'hidden';
+        // }
     },
 
     /**
@@ -1037,9 +1037,9 @@ ss.SimpleUpload.prototype = {
 
         btn = !btn ? this._btns[0] : btn;
 
-        if ( btn && this._input && this._input.parentNode ) {
-            ss.copyLayout( btn, this._input.parentNode );
-        }
+        // if ( btn && this._input && this._input.parentNode ) {
+        //     ss.copyLayout( btn, this._input.parentNode );
+        // }
 
         btn = null;
     },
@@ -1061,8 +1061,8 @@ ss.SimpleUpload.prototype = {
             }
 
             self._overBtn = elem;
-            ss.copyLayout( elem, self._input.parentNode );
-            self._input.parentNode.style.visibility = 'visible';
+            // ss.copyLayout( elem, self._input.parentNode );
+            // self._input.parentNode.style.visibility = 'visible';
         });
 
         // Support keyboard interaction
@@ -1103,9 +1103,9 @@ ss.SimpleUpload.prototype = {
                     window.setTimeout(function() {
                         self.updatePosition( elem );
 
-                        if ( self._btns.length === 1 ) {
-                            self._input.parentNode.style.visibility = 'hidden';
-                        }
+                        // if ( self._btns.length === 1 ) {
+                        //     self._input.parentNode.style.visibility = 'hidden';
+                        // }
                     }, 200);
 
                 } else {
@@ -1980,8 +1980,8 @@ ss.extendObj( ss.SimpleUpload.prototype, {
     _createInput: function() {
         "use strict";
 
-        var self = this,
-            div = document.createElement( 'div' );
+        var self = this;
+            // div = document.createElement( 'div' );
 
         this._input = document.createElement( 'input' );
         this._input.type = 'file';
@@ -1998,31 +1998,35 @@ ss.extendObj( ss.SimpleUpload.prototype, {
             this._input.accept = this._opts.accept;
         }
 
-        ss.addStyles( div, {
-            'display' : 'none',
-            'position' : 'relative',
-            'visibility' : 'hidden',
-            'overflow' : 'hidden',
-            'margin' : 0,
-            'padding' : 0,
-            'opacity' : 0,
-            'direction' : 'ltr',
-            'zIndex': 16777270
-        });
+        // ss.addStyles( div, {
+        //     'display' : 'none',
+        //     'position' : 'relative',
+        //     'visibility' : 'hidden',
+        //     'overflow' : 'hidden',
+        //     'margin' : 0,
+        //     'padding' : 0,
+        //     'opacity' : 0,
+        //     'direction' : 'ltr',
+        //     'zIndex': 16777270
+        // });
 
-        if ( div.style.opacity !== '0' ) {
-            div.style.filter = 'alpha(opacity=0)';
-        }
+        // if ( div.style.opacity !== '0' ) {
+        //     div.style.filter = 'alpha(opacity=0)';
+        // }
+
+
 
         ss.addStyles( this._input, {
             'position' : 'absolute',
-            'right' : 0,
             'margin' : 0,
             'padding' : 0,
             'fontSize' : '480px',
             'fontFamily' : 'sans-serif',
             'cursor' : 'pointer',
-            'height' : '100%',
+            'height' : self._btns[0].offsetHeight + 'px',
+            'width' : self._btns[0].offsetWidth + 'px',
+            'left' : self._btns[0].offsetLeft + 'px',
+            'top': self._btns[0].offsetTop + 'px',
             'zIndex': 16777270
         });
 
@@ -2049,20 +2053,20 @@ ss.extendObj( ss.SimpleUpload.prototype, {
             }
         });
 
-        if ( self._opts.hoverClass !== '' ) {
-            div.mouseOverOff = ss.addEvent( div, 'mouseover', function() {
-                ss.addClass( self._overBtn, self._opts.hoverClass );
-            });
-        }
+        // if ( self._opts.hoverClass !== '' ) {
+        //     div.mouseOverOff = ss.addEvent( div, 'mouseover', function() {
+        //         ss.addClass( self._overBtn, self._opts.hoverClass );
+        //     });
+        // }
 
-        div.mouseOutOff = ss.addEvent( div, 'mouseout', function() {
-            self._input.parentNode.style.visibility = 'hidden';
+        // div.mouseOutOff = ss.addEvent( div, 'mouseout', function() {
+        //     self._input.parentNode.style.visibility = 'hidden';
 
-            if ( self._opts.hoverClass !== '' ) {
-                ss.removeClass( self._overBtn, self._opts.hoverClass );
-                ss.removeClass( self._overBtn, self._opts.focusClass );
-            }
-        });
+        //     if ( self._opts.hoverClass !== '' ) {
+        //         ss.removeClass( self._overBtn, self._opts.hoverClass );
+        //         ss.removeClass( self._overBtn, self._opts.focusClass );
+        //     }
+        // });
 
         if ( self._opts.focusClass !== '' ) {
             this._input.focusOff = ss.addEvent( this._input, 'focus', function() {
@@ -2074,9 +2078,10 @@ ss.extendObj( ss.SimpleUpload.prototype, {
             });
         }
 
-        div.appendChild( this._input );
-        document.body.appendChild( div );
-        div = null;
+        self._btns[0].parentNode.appendChild(this._input);
+        // div.appendChild( this._input );
+        // document.body.appendChild( div );
+        // div = null;
     },
 
     /**
@@ -2232,11 +2237,11 @@ ss.extendObj( ss.SimpleUpload.prototype, {
             this._input.blurOff();
         }
 
-        if ( this._input.parentNode.mouseOverOff ) {
-            this._input.parentNode.mouseOverOff();
-        }
+        // if ( this._input.parentNode.mouseOverOff ) {
+        //     this._input.parentNode.mouseOverOff();
+        // }
 
-        ss.remove( this._input.parentNode );
+        // ss.remove( this._input.parentNode );
         delete this._input;
         this._input = null;
     },
